@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+	
+	<data>
+		
+		<variable
+			name="search"
+			type="com.example.weather.data.model.SearchWeatherResponse.SearchWeatherResponseItem" />
+	</data>
+	
+	<com.google.android.material.card.MaterialCardView
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
+		app:cardBackgroundColor="?colorSecondary"
+		app:cardCornerRadius="8dp"
+		app:cardElevation="4dp">
+		
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="8dp">
+			
+			
+			<TextView
+				android:id="@+id/location_name_txt"
+				style="@style/simple_text_style"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@{search.name}"
+				android:textSize="18sp"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+			
+			<TextView
+				android:id="@+id/country_name_txt"
+				style="@style/simple_text_style"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:text="@{search.country}"
+				android:textSize="16sp"
+				android:textStyle="normal"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/location_name_txt" />
+			
+			<ImageView
+				android:id="@+id/add_image"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/baseline_add_24"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:tint="?colorOnSecondary" />
+		
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	
+	</com.google.android.material.card.MaterialCardView>
+
+</layout>

@@ -1,0 +1,16 @@
+<resources>
+	<string name="app_name">Weather</string>
+	<string name="hello_blank_fragment">Hello blank fragment</string>
+	<string name="location_image">location_image</string>
+	<string name="temperature">Temperature</string>
+	<string name="today">Today</string>
+	<string name="forecast_report">Forecast Report</string>
+	<string name="visibility">Visibility</string>
+	<string name="cloud">Cloud</string>
+	<string name="pressure">Pressure</string>
+	<string name="wind">Wind</string>
+	<string name="humidity">Humidity</string>
+	<string name="wind_direction">Wind direction</string>
+	<string name="search_new_place">Search</string>
+	<string name="not_found">Not found !!</string>
+</resources>

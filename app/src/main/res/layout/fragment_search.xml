@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:padding="12dp"
+	tools:context=".ui.fragments.search.SearchFragment">
+	
+	<!--  Search	-->
+	<com.google.android.material.textfield.TextInputLayout
+		android:id="@+id/search_input_txt_layout"
+		style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="@string/search_new_place"
+		android:textColorHint="?colorOnSecondary"
+		app:boxBackgroundColor="?colorSecondary"
+		app:boxStrokeColor="?colorOnSecondary"
+		app:endIconMode="clear_text"
+		app:endIconTint="?colorOnSecondary"
+		app:hintTextColor="?colorOnSecondary"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:startIconDrawable="@drawable/baseline_search_24"
+		app:startIconTint="?colorOnSecondary">
+		
+		
+		<com.google.android.material.textfield.TextInputEditText
+			android:id="@+id/search_edt_txt"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textColor="?colorOnSecondary"
+			android:textColorHint="?colorOnSecondary" />
+	
+	
+	</com.google.android.material.textfield.TextInputLayout>
+	
+<!--	<EditText-->
+<!--		android:layout_width="match_parent"-->
+<!--		android:layout_height="wrap_content"-->
+<!--		app:layout_constraintTop_toTopOf="parent"-->
+<!--		app:layout_constraintStart_toStartOf="parent"-->
+<!--		app:layout_constraintEnd_toEndOf="parent"-->
+<!--		android:id="@+id/search_input_txt_layout"-->
+<!--		android:hint="Search"/>-->
+	
+	<!--  Search list	-->
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/search_rec"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="8dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/search_input_txt_layout"
+		tools:listitem="@layout/item_search_weather" />
+	
+	<!--  Loading	-->
+	<ProgressBar
+		android:id="@+id/search_progress_bar"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:visibility="invisible"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+	
+	<!--  Empty layout	-->
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/empty_layout"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:visibility="gone"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
+		
+		
+		<include layout="@layout/empty_layout" />
+	
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
