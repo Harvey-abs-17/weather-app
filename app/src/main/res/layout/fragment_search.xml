@@ -37,14 +37,6 @@
 	
 	</com.google.android.material.textfield.TextInputLayout>
 	
-<!--	<EditText-->
-<!--		android:layout_width="match_parent"-->
-<!--		android:layout_height="wrap_content"-->
-<!--		app:layout_constraintTop_toTopOf="parent"-->
-<!--		app:layout_constraintStart_toStartOf="parent"-->
-<!--		app:layout_constraintEnd_toEndOf="parent"-->
-<!--		android:id="@+id/search_input_txt_layout"-->
-<!--		android:hint="Search"/>-->
 	
 	<!--  Search list	-->
 	<androidx.recyclerview.widget.RecyclerView
@@ -62,11 +54,11 @@
 		android:id="@+id/search_progress_bar"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:visibility="invisible"
+		android:visibility="gone"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent" />
+		app:layout_constraintTop_toTopOf="parent"/>
 	
 	<!--  Empty layout	-->
 	<androidx.constraintlayout.widget.ConstraintLayout

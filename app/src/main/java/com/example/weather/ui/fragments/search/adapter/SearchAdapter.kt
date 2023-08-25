@@ -10,21 +10,31 @@ import com.example.weather.data.model.SearchWeatherResponse.SearchWeatherRespons
 import com.example.weather.databinding.ItemSearchWeatherBinding
 import javax.inject.Inject
 
-class SearchAdapter @Inject constructor(): RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
+class SearchAdapter @Inject constructor() : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
-    private lateinit var binding :ItemSearchWeatherBinding
-    private var oldItem :List<SearchWeatherResponseItem> = emptyList()
+    private lateinit var binding: ItemSearchWeatherBinding
+    private var oldItem: List<SearchWeatherResponseItem> = emptyList()
 
-    inner class SearchViewHolder : RecyclerView.ViewHolder(binding.root){
+    inner class SearchViewHolder : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindViews(item : SearchWeatherResponseItem){
+        fun bindViews(item: SearchWeatherResponseItem) {
             binding.search = item
+            binding.root.setOnClickListener {
+                onItemClickListener?.let {
+                    it(item.name.toString())
+                }
+            }
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_search_weather, parent, false)
+        binding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.item_search_weather,
+            parent,
+            false
+        )
         return SearchViewHolder()
     }
 
@@ -41,7 +51,12 @@ class SearchAdapter @Inject constructor(): RecyclerView.Adapter<SearchAdapter.Se
         return position
     }
 
-    fun setData(searchList :List<SearchWeatherResponseItem>){
+    private var onItemClickListener: ((location :String) -> Unit)? = null
+    fun itemClickListener( listener :(location :String) -> Unit){
+        onItemClickListener = listener
+    }
+
+    fun setData(searchList: List<SearchWeatherResponseItem>) {
         val differ = DifferCallback(oldItem, searchList)
         val differCallback = DiffUtil.calculateDiff(differ)
         oldItem = searchList
@@ -49,7 +64,10 @@ class SearchAdapter @Inject constructor(): RecyclerView.Adapter<SearchAdapter.Se
     }
 
 
-    class DifferCallback( private val oldList :List<SearchWeatherResponseItem>, private val newList :List<SearchWeatherResponseItem> ) :DiffUtil.Callback(){
+    class DifferCallback(
+        private val oldList: List<SearchWeatherResponseItem>,
+        private val newList: List<SearchWeatherResponseItem>
+    ) : DiffUtil.Callback() {
         override fun getOldListSize(): Int {
             return oldList.size
         }

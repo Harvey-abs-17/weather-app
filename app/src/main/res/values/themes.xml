@@ -18,4 +18,17 @@
 		<item name="android:textStyle">bold</item>
 	
 	</style>
+	
+	<style name="MySparkViewStyle" parent="spark_SparkView">
+		<item name="spark_lineColor">?attr/colorOnPrimary</item>
+		<item name="spark_lineWidth">2dp</item>
+		<item name="spark_cornerRadius">2dp</item>
+		<item name="spark_fill">false</item>
+		<item name="spark_baseLineColor">?attr/colorOnPrimary</item>
+		<item name="spark_baseLineWidth">2dp</item>
+		<item name="spark_scrubLineColor">?attr/colorOnPrimary</item>
+		<item name="spark_scrubLineWidth">2dp</item>
+		<item name="spark_scrubEnabled">true</item>
+		<item name="spark_animateChanges">true</item>
+	</style>
 </resources>

@@ -1,10 +1,18 @@
 package com.example.weather.ui.fragments.search
 
+import android.util.Log
+import com.example.weather.data.model.SearchWeatherResponse
+import com.example.weather.data.model.SearchWeatherResponse.SearchWeatherResponseItem
 import com.example.weather.data.repository.SearchRepository
 import com.example.weather.ui.base.BasePresenterImpl
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.functions.Function
+import io.reactivex.rxjava3.observers.DisposableObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.delay
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SearchPresenter @Inject constructor(
@@ -13,17 +21,22 @@ class SearchPresenter @Inject constructor(
 ) : BasePresenterImpl(), SearchContract.Presenter {
 
     override fun searchLocationPresenter(location: String) {
-        view.showLoading()
+        view.showLoading(true)
         disposable = repository.searchLocationRepository(location)
+            .switchMap{ t->
+                Observable.just(t)
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                if(it.isNotEmpty()){
+            .subscribe({
+                if (it.isNotEmpty()) {
                     view.loadLocations(it)
-                }else{
+                } else {
                     view.showEmpty()
                 }
-            }
-        view.hideLoading()
+                view.showLoading(false)
+            }, {
+                Log.e("error", it.toString())
+            })
     }
 }

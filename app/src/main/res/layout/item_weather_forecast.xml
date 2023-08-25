@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="100dp"
+	android:layout_height="110dp"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	app:cardElevation="4dp"
+	app:cardBackgroundColor="?colorSecondary"
+	app:cardCornerRadius="8dp"
+	android:layout_marginVertical="8dp"
+	android:layout_marginEnd="8dp">
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:gravity="center_horizontal"
+		android:weightSum="3">
+		
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"
+			android:id="@+id/today_time_txt"
+			tools:text="00 PM"
+			style="@style/simple_text_style"
+			android:gravity="center"
+			android:textColor="?colorPrimary"/>
+		
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"
+			android:id="@+id/weather_image"
+			tools:src="@drawable/sunny_day"/>
+		
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:id="@+id/current_temp_layout"
+			android:layout_width="50dp"
+			android:layout_height="0dp"
+			android:layout_weight="1">
+			
+			<TextView
+				android:id="@+id/current_temp_txt"
+				style="@style/simple_text_style"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textSize="18sp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:text="24"
+				/>
+			
+			<ImageView
+				android:id="@+id/temp_image"
+				android:layout_width="10dp"
+				android:layout_height="10dp"
+				app:tint="?colorOnPrimary"
+				android:src="@drawable/outline_circle_24"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="parent"/>
+		
+		
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	
+	
+	
+	</LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
