@@ -10,8 +10,9 @@ import com.example.weather.databinding.ItemWeatherForecastBinding
 import com.example.weather.utils.specifyWeatherImageAndColor
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
-class ForecastAdapter @Inject constructor( @ApplicationContext private val context :Context) :RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>() {
+class HourForecastAdapter @Inject constructor( @ApplicationContext private val context :Context) :RecyclerView.Adapter<HourForecastAdapter.ForecastViewHolder>() {
 
     private lateinit var binding :ItemWeatherForecastBinding
     private var forecastList = emptyList<Hour>()
@@ -21,7 +22,7 @@ class ForecastAdapter @Inject constructor( @ApplicationContext private val conte
         fun bindViews(item : Hour){
             binding.apply {
                 todayTimeTxt.text = item.time.substring(10)
-                currentTempTxt.text = item.tempC.toString()
+                currentTempTxt.text = item.tempC.roundToInt().toString()
                 weatherImage.setImageDrawable(
                     specifyWeatherImageAndColor(
                         item.condition.text!!,

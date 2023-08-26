@@ -26,10 +26,12 @@ class DetailPresenter @Inject constructor(
     }
 
     override fun getForecastWeatherPresenter(location: String, days: Int) {
+        view.showLoading(true)
         disposable = repository.getForecastWeatherRepository(location = location, days = days)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                view.showLoading(false)
                 view.loadForecastRec(it)
                 view.loadWeatherChart(it)
             }, {

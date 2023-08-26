@@ -12,7 +12,7 @@ const val TIME_OUT = 60L
 const val BODY_LOGGING_INTERCEPTOR = "body"
 const val HEADER_LOGGING_INTERCEPTOR = "header"
 
-fun specifyWeatherImageAndColor(weatherCondition: String, isDay: Int, context :Context): Drawable? {
+fun specifyWeatherImageAndColor(weatherCondition: String, isDay: Int, context: Context): Drawable? {
     return when (isDay) {
         1 -> {
             when (weatherCondition) {
@@ -48,7 +48,15 @@ fun specifyWeatherImageAndColor(weatherCondition: String, isDay: Int, context :C
                     ContextCompat.getDrawable(context, R.drawable.rain)
                 }
 
+                "Moderate rain" -> {
+                    ContextCompat.getDrawable(context, R.drawable.rain)
+                }
+
                 "Light rain shower" -> {
+                    ContextCompat.getDrawable(context, R.drawable.day_rain_cloud)
+                }
+
+                "Patchy rain possible" -> {
                     ContextCompat.getDrawable(context, R.drawable.day_rain_cloud)
                 }
 
@@ -92,7 +100,15 @@ fun specifyWeatherImageAndColor(weatherCondition: String, isDay: Int, context :C
                     ContextCompat.getDrawable(context, R.drawable.rain)
                 }
 
+                "Moderate rain" -> {
+                    ContextCompat.getDrawable(context, R.drawable.rain)
+                }
+
                 "Light rain shower" -> {
+                    ContextCompat.getDrawable(context, R.drawable.night_rain_cloud)
+                }
+
+                "Patchy rain possible" -> {
                     ContextCompat.getDrawable(context, R.drawable.night_rain_cloud)
                 }
 

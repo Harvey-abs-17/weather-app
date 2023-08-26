@@ -318,14 +318,14 @@
 							app:layout_constraintStart_toStartOf="parent"
 							app:layout_constraintTop_toTopOf="parent" />
 						
-						<com.robinhood.spark.SparkView
-							android:id="@+id/sparkview"
+						<com.github.mikephil.charting.charts.LineChart
 							android:layout_width="match_parent"
-							android:layout_height="120dp"
+							android:layout_height="130dp"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintEnd_toEndOf="parent"
 							app:layout_constraintTop_toBottomOf="@id/temperature_txt_title"
-							app:layout_constraintBottom_toBottomOf="parent"
-							style="@style/MySparkViewStyle"
-							app:layout_constraintStart_toStartOf="parent"/>
+							android:id="@+id/chart"
+							android:layout_marginTop="4dp"/>
 					
 					
 					</androidx.constraintlayout.widget.ConstraintLayout>
@@ -342,7 +342,8 @@
 				android:padding="8dp"
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toBottomOf="@id/main_info_layout">
+				app:layout_constraintTop_toBottomOf="@id/main_info_layout"
+				android:layout_marginTop="4dp">
 				
 				<TextView
 					android:id="@+id/today_txt_title"
@@ -374,7 +375,9 @@
 					app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 					app:layout_constraintEnd_toEndOf="parent"
 					app:layout_constraintStart_toStartOf="parent"
-					app:layout_constraintTop_toBottomOf="@id/today_txt_title" />
+					app:layout_constraintTop_toBottomOf="@id/today_txt_title"
+					tools:listitem="@layout/item_weather_forecast"
+					android:layout_marginTop="4dp"/>
 			
 			
 			</androidx.constraintlayout.widget.ConstraintLayout>

@@ -64,7 +64,11 @@ class SearchFragment : Fragment(), SearchContract.View {
                     LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             }
             searchAdapter.itemClickListener {
-                findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailFragment(it))
+                findNavController().navigate(
+                    SearchFragmentDirections.actionSearchFragmentToDetailFragment(
+                        it
+                    )
+                )
             }
         }
     }
@@ -84,6 +88,11 @@ class SearchFragment : Fragment(), SearchContract.View {
                 searchProgressBar.visibility = View.GONE
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
     }
 
 

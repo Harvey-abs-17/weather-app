@@ -13,4 +13,6 @@
 	<string name="wind_direction">Wind direction</string>
 	<string name="search_new_place">Search</string>
 	<string name="not_found">Not found !!</string>
+	<string name="chance_of_snow">Snow</string>
+	<string name="chance_of_rain">Rain</string>
 </resources>
