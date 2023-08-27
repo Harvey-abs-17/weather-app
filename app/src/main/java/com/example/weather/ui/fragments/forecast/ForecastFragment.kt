@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,12 +21,15 @@ import kotlin.math.roundToInt
 @AndroidEntryPoint
 class ForecastFragment : Fragment(), ForecastContract.View {
 
+    //binding
     private lateinit var binding: FragmentForecastBinding
+
+    //fragment arg
     private val forecastArgs: ForecastFragmentArgs by navArgs()
 
+    //inject dependencies
     @Inject
     lateinit var forecastAdapter :DayForecastAdapter
-
     @Inject
     lateinit var presenter :ForecastPresenter
 
@@ -40,11 +44,18 @@ class ForecastFragment : Fragment(), ForecastContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // get 3 days forecast weather
         presenter.getDaysForecastWeatherPresenter(forecastArgs.location, 3)
+        //bind detail weather data for each item
         bindDetailForecastViews()
+        // back btn
+        binding.forecastBackBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
     }
 
+    //bind detail weather data for each item
     private fun bindDetailForecastViews(){
         binding.apply {
             forecastAdapter.itemClickListener {
@@ -64,11 +75,14 @@ class ForecastFragment : Fragment(), ForecastContract.View {
                 visibilityTxt.text = "${it.day.avgvisKm} Km"
                 snowChanceTxt.text = "${it.day.dailyChanceOfSnow} %"
                 rainChanceTxt.text = "${it.day.dailyChanceOfRain} %"
+                sunriseTxt.text = it.astro.sunrise
+                sunSetTxt.text = it.astro.sunset
+                uvTxt.text = it.day.uv.toString()
             }
         }
     }
 
-
+    //load forecast rec data
     override fun loadDaysForecastWeather(forecastWeather: ForecastWeatherResponse) {
         binding.apply {
         forecastAdapter.setData(forecastWeather.forecast.forecastday)
@@ -79,6 +93,7 @@ class ForecastFragment : Fragment(), ForecastContract.View {
         }
     }
 
+    //manage loading progress bar
     override fun showLoading(shown: Boolean) {
         binding.apply {
             if (shown) {

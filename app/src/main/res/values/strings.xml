@@ -15,4 +15,9 @@
 	<string name="not_found">Not found !!</string>
 	<string name="chance_of_snow">Snow</string>
 	<string name="chance_of_rain">Rain</string>
+	<string name="sunrise">Sunrise</string>
+	<string name="sunset">Sunset</string>
+	<string name="uv">UV</string>
+	<string name="next_3_days">Next 3 days</string>
+	<string name="search_for_city">Search for city</string>
 </resources>

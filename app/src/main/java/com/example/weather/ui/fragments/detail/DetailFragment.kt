@@ -27,12 +27,14 @@ import kotlin.math.roundToInt
 @AndroidEntryPoint
 class DetailFragment : Fragment(), DetailContract.View {
 
+    //binding
     private lateinit var binding: FragmentDetailBinding
+    //fragment arg
     private val arg: DetailFragmentArgs by navArgs()
 
+    // inject dependencies
     @Inject
     lateinit var presenter: DetailPresenter
-
     @Inject
     lateinit var forecastAdapter: HourForecastAdapter
 
@@ -48,19 +50,33 @@ class DetailFragment : Fragment(), DetailContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //get current weather
         presenter.getCurrentWeatherPresenter(arg.location)
+        //get forecast weather
         presenter.getForecastWeatherPresenter(arg.location, 1)
         binding.apply {
+            //go to forecast fragment
             nextDaysTxtTitle.setOnClickListener {
                 findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToForecastFragment(arg.location))
+            }
+            // go back
+            detailBackBtn.setOnClickListener {
+                findNavController().popBackStack()
             }
         }
     }
 
+    //load current weather
     override fun loadCurrentWeather(currentWeather: CurrentWeatherResponse) {
         binding.apply {
             locationName.text = currentWeather.location?.name
             timeTxt.text = currentWeather.location?.localtime
+            weatherSituationTxt.text = currentWeather.current?.condition?.text
+            currentTempTxt.text = currentWeather.current?.feelslikeC?.roundToInt().toString()
+            windSpeedTxt.text = "${currentWeather.current?.windMph.toString()} mph"
+            humidityTxt.text = "${currentWeather.current?.humidity.toString()} %"
+            windDirectionTxt.text = currentWeather.current?.windDir
+            detailActionBarTitle.text = currentWeather.location?.name
             weatherImage.setImageDrawable(
                 specifyWeatherImageAndColor(
                     currentWeather.current?.condition?.text!!,
@@ -68,19 +84,13 @@ class DetailFragment : Fragment(), DetailContract.View {
                     requireContext()
                 )
             )
-            weatherSituationTxt.text = currentWeather.current?.condition?.text
-            currentTempTxt.text = currentWeather.current?.feelslikeC?.roundToInt().toString()
-            windSpeedTxt.text = "${currentWeather.current?.windMph.toString()} mph"
-            humidityTxt.text = "${currentWeather.current?.humidity.toString()} %"
-            windDirectionTxt.text = currentWeather.current?.windDir
-
         }
     }
 
+    //load chart weather
     override fun loadWeatherChart(forecastData: ForecastWeatherResponse) {
-
+        // create list of chart data set
         val entries: ArrayList<Entry> = arrayListOf()
-        val times = listOf<String>("Morning", "Afternoon", "Evening", "Night")
         for ((i, item) in forecastData.forecast.forecastday[0].hour.withIndex()) {
             if (i % 6 == 0) {
                 entries.add(
@@ -91,18 +101,11 @@ class DetailFragment : Fragment(), DetailContract.View {
                 )
             }
         }
-
         val dataSet = LineDataSet(entries, "Label")
         dataSet.color = ContextCompat.getColor(requireContext(), R.color.text_day_color)
         val lineData = LineData(dataSet)
 
-//        val xAxis: XAxis = binding.chart.xAxis
-//        xAxis.position = XAxis.XAxisPosition.BOTTOM
-////        xAxis.setDrawGridLines(false)
-////        xAxis.granularity = 1f
-////        xAxis.isGranularityEnabled = false
-//        binding.chart.xAxis.valueFormatter = IndexAxisValueFormatter(times)
-
+        // bind chart view
         binding.apply {
             chart.data = lineData
             chart.axisLeft.setDrawLabels(false)
@@ -112,10 +115,9 @@ class DetailFragment : Fragment(), DetailContract.View {
             chart.legend.isEnabled = false
             chart.invalidate()
         }
-
-
     }
 
+    //load forecast rec data
     override fun loadForecastRec(forecastData: ForecastWeatherResponse) {
         binding.apply {
             forecastAdapter.setData(forecastData.forecast.forecastday[0].hour)
@@ -127,12 +129,15 @@ class DetailFragment : Fragment(), DetailContract.View {
         }
     }
 
+    //manage loading progress bar
     override fun showLoading(shown: Boolean) {
         binding.apply {
             if (shown) {
                 detailProgressBar.visibility = View.VISIBLE
+                mainLayout.visibility = View.GONE
             } else {
                 detailProgressBar.visibility = View.GONE
+                mainLayout.visibility = View.VISIBLE
             }
         }
     }

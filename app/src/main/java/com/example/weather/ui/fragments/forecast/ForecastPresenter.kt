@@ -12,6 +12,7 @@ class ForecastPresenter @Inject constructor(
     private val view: ForecastContract.View
 ) : BasePresenterImpl(), ForecastContract.Presenter {
 
+    // get 3 days forecast weather
     override fun getDaysForecastWeatherPresenter(location: String, days: Int) {
         view.showLoading(true)
         disposable = repository.getDaysForecastWeatherRepository(location, days)

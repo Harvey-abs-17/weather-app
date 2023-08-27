@@ -14,7 +14,9 @@ import kotlin.math.roundToInt
 
 class HourForecastAdapter @Inject constructor( @ApplicationContext private val context :Context) :RecyclerView.Adapter<HourForecastAdapter.ForecastViewHolder>() {
 
+    //binding
     private lateinit var binding :ItemWeatherForecastBinding
+    // forecast list
     private var forecastList = emptyList<Hour>()
 
     inner class ForecastViewHolder :RecyclerView.ViewHolder( binding.root ){
@@ -52,6 +54,7 @@ class HourForecastAdapter @Inject constructor( @ApplicationContext private val c
         return position
     }
 
+    //set list data
     fun setData(newItemList :List<Hour>){
         val differCallback = DifferCallback(forecastList, newItemList)
         val differ = DiffUtil.calculateDiff(differCallback)
@@ -59,6 +62,7 @@ class HourForecastAdapter @Inject constructor( @ApplicationContext private val c
         differ.dispatchUpdatesTo(this)
     }
 
+    //differ callback
     class DifferCallback(private val oldList :List<Hour>, private val newList :List<Hour>) :DiffUtil.Callback(){
         override fun getOldListSize(): Int {
             return oldList.size

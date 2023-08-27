@@ -7,14 +7,10 @@ import com.example.weather.ui.base.BaseView
 interface ForecastContract {
 
     interface View : BaseView {
-
         fun loadDaysForecastWeather(forecastWeather: ForecastWeatherResponse)
-
     }
 
     interface Presenter : BasePresenter {
-
         fun getDaysForecastWeatherPresenter(location :String, days :Int)
-
     }
 }

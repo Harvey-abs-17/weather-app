@@ -12,6 +12,7 @@ class DetailPresenter @Inject constructor(
     private val view: DetailContract.View
 ) : BasePresenterImpl(), DetailContract.Presenter {
 
+    //get current weather
     override fun getCurrentWeatherPresenter(location: String) {
         view.showLoading(true)
         disposable = repository.getCurrentWeather(location)
@@ -25,13 +26,12 @@ class DetailPresenter @Inject constructor(
             })
     }
 
+    //get forecast weather
     override fun getForecastWeatherPresenter(location: String, days: Int) {
-        view.showLoading(true)
         disposable = repository.getForecastWeatherRepository(location = location, days = days)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                view.showLoading(false)
                 view.loadForecastRec(it)
                 view.loadWeatherChart(it)
             }, {

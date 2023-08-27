@@ -20,6 +20,7 @@ class SearchPresenter @Inject constructor(
     private val view: SearchContract.View
 ) : BasePresenterImpl(), SearchContract.Presenter {
 
+    //get search location data
     override fun searchLocationPresenter(location: String) {
         view.showLoading(true)
         disposable = repository.searchLocationRepository(location)
@@ -29,12 +30,12 @@ class SearchPresenter @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                view.showLoading(false)
                 if (it.isNotEmpty()) {
                     view.loadLocations(it)
                 } else {
                     view.showEmpty()
                 }
-                view.showLoading(false)
             }, {
                 Log.e("error", it.toString())
             })
